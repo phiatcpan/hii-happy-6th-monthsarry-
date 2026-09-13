@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 6th Monthsary 💌</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+    background:#fef0f6;
+    color:#5a2e44;
+    line-height:1.8;
+    min-height:100vh;
+}
+
+/* 🌸 FLOATING EMOJIS */
+.floating-emoji{
+    position:absolute;
+    font-size:24px;
+    opacity:.6;
+    animation:floatEmoji 3.5s ease-in-out infinite;
+    z-index:1;
+    pointer-events:none;
+}
+
+@keyframes floatEmoji{
+    0%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-12px) rotate(5deg)}
+    100%{transform:translateY(0) rotate(0deg)}
+}
+
+/* 🔒 LOCK SCREEN */
+#lockScreen{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:#fef0f6;
+    z-index:999;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    overflow:hidden;
+}
+
+.lock-icon{
+    font-size:80px;
+    margin-bottom:10px;
+    position:relative;
+    z-index:5;
+}
+
+#lockScreen h1{
+    color:#d66b97;
+    margin:10px 0 20px;
+    text-align:center;
+    position:relative;
+    z-index:5;
+}
+
+/* 🎵 PASSWORD MUSIC BUTTON */
+.password-music{
+    border:none;
+    background:white;
+    color:#d66b97;
+    padding:13px 24px;
+    border-radius:30px;
+    font-size:16px;
+    box-shadow:0 5px 15px rgba(214,107,151,.2);
+    cursor:pointer;
+    margin-bottom:15px;
+    position:relative;
+    z-index:5;
+}
+
+.password-music:active{
+    transform:scale(.96);
+}
+
+#passwordInput{
+    padding:14px 20px;
+    width:240px;
+    font-size:18px;
+    border:2px solid #f8c8dc;
+    border-radius:30px;
+    text-align:center;
+    background:white;
+    outline:none;
+    position:relative;
+    z-index:5;
+}
+
+.enter-text{
+    margin-top:10px;
+    color:#b88fa0;
+    font-size:13px;
+    position:relative;
+    z-index:5;
+}
+
+.error{
+    color:#e63960;
+    margin-top:12px;
+    display:none;
+    position:relative;
+    z-index:5;
+}
+
+/* 💗 MAIN CONTENT */
+#mainContent{
+    display:none;
+    padding:20px;
+    max-width:620px;
+    margin:0 auto;
+    padding-bottom:50px;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h2{
+    color:#d66b97;
+    text-align:center;
+    margin:30px 0 20px;
+    font-size:22px;
+}
+
+/* 🎯 EMOJI GRID */
+.emoji-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.emoji-card{
+    background:white;
+    padding:25px 15px;
+    border-radius:18px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(214,107,151,.12);
+    transition:.3s;
+}
+
+.emoji-card:hover{
+    transform:scale(1.04);
+    background:#fff0f6;
+}
+
+.emoji-card:active{
+    transform:scale(.96);
+}
+
+.emoji-card span{
+    font-size:40px;
+    display:block;
+    margin-bottom:8px;
+}
+
+.emoji-card small{
+    color:#d66b97;
+    font-size:14px;
+}
+
+/* 📦 CONTENT BOX */
+.content-box{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:25px;
+    box-shadow:0 4px 12px rgba(214,107,151,.12);
+    display:none;
+    animation:popIn .5s ease;
+}
+
+@keyframes popIn{
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.content-box.show{
+    display:block;
+}
+
+.content-box h3{
+    color:#d66b97;
+    margin-bottom:15px;
+    font-size:19px;
+    border-bottom:2px dashed #f8c8dc;
+    padding-bottom:10px;
+}
+
+/* 🔙 BACK BUTTON */
+.back-btn{
+    background:#f8c8dc;
+    color:#8b5c70;
+    border:none;
+    padding:8px 20px;
+    border-radius:25px;
+    cursor:pointer;
+    margin-bottom:20px;
+    font-size:14px;
+    display:none;
+}
+
+.back-btn.show{
+    display:inline-block;
+}
+
+/* 🎵 MUSIC BUTTON AFTER LOGIN */
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:50;
+    border:none;
+    background:white;
+    color:#d66b97;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    font-size:23px;
+    box-shadow:0 5px 15px rgba(214,107,151,.25);
+    cursor:pointer;
+    display:none;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    padding:20px;
+    color:#d66b97;
+    font-size:16px;
+}
+
+@media(max-width:500px){
+    .emoji-grid{
+        gap:12px;
+    }
+
+    .content-box{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔒 PASSWORD SCREEN -->
+<div id="lockScreen">
+
+    <div class="floating-emoji" style="top:8%;left:6%">🌷</div>
+    <div class="floating-emoji" style="top:12%;right:8%">☘️</div>
+    <div class="floating-emoji" style="top:20%;left:12%">✨</div>
+    <div class="floating-emoji" style="top:10%;right:18%">💞</div>
+    <div class="floating-emoji" style="bottom:22%;left:8%">💍</div>
+    <div class="floating-emoji" style="bottom:18%;right:12%">🩷</div>
+    <div class="floating-emoji" style="top:28%;left:18%">🌸</div>
+    <div class="floating-emoji" style="bottom:28%;right:6%">🍒</div>
+    <div class="floating-emoji" style="top:35%;right:10%">🍥</div>
+    <div class="floating-emoji" style="bottom:35%;left:10%">💌</div>
+    <div class="floating-emoji" style="top:18%;left:22%">🎀</div>
+    <div class="floating-emoji" style="bottom:12%;right:20%">💕</div>
+    <div class="floating-emoji" style="top:42%;left:8%">💖</div>
+
+    <div class="lock-icon">🔒</div>
+
+    <h1>Enter Our Password 💌</h1>
+
+    <!-- 🎵 MUSIC BUTTON MUNA -->
+    <button class="password-music" id="passwordMusicBtn" onclick="togglePasswordMusic()">
+        🎵 Play Our Song
+    </button>
+
+    <input
+        type="password"
+        id="passwordInput"
+        placeholder="Type our password..."
+        autocomplete="off"
+    >
+
+    <div class="enter-text">
+        Password: our special date 💞
+    </div>
+
+    <div class="error" id="errorMsg">
+        Wrong password, try again 🥺
+    </div>
+
+</div>
+
+
+<!-- 🎵 MUSIC -->
+<!--
+IMPORTANT:
+Ilagay ang music.mp3 sa SAME FOLDER nitong HTML file.
+-->
+<audio id="loveMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- 💗 MAIN CONTENT -->
+<div id="mainContent">
+
+    <h2>💌 Happy 6th Monthsary Asawa Ko 💌</h2>
+
+    <button class="back-btn" id="backBtn" onclick="showGrid()">
+        ← Go Back
+    </button>
+
+
+    <!-- 🎯 EMOJI CHOICES -->
+    <div class="emoji-grid" id="emojiGrid">
+
+        <div class="emoji-card" onclick="showContent('letter')">
+            <span>✉️</span>
+            <small>A Letter For You</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('ever')">
+            <span>💕</span>
+            <small>If You Ever..</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('choose')">
+            <span>☘️✨</span>
+            <small>Why I Choose You</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('song')">
+            <span>🎵</span>
+            <small>My Songs</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('promise')">
+            <span>🤞</span>
+            <small>My Promise</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('bible')">
+            <span>✝️</span>
+            <small>Bible Verse</small>
+        </div>
+
+        <div class="emoji-card" onclick="showContent('memory')">
+            <span>📸</span>
+            <small>One Thing I'll Never Forget</small>
+        </div>
+
+    </div>
+
+
+    <!-- 💌 LETTER -->
+    <div class="content-box" id="letter">
+
+        <h3>✉️ A Letter For You 💞🌷😘🤗</h3>
+
+        <p>
+happy 6th monthsary asawa ko🥹🫶,... una sa lahat I just want to say na mahal na mahal kita sobra sobra miss na miss ko na ang asawa ko na yan (T_T) lagi ka pong mag iingat asawa ko sa trabaho mo ha, andito lang po ako lagi kapag kailangan mo nang tulong andito lang din po ako kung may problema ka po, handa po akong makinig asawa ko 😘 wag ka pong mag papalipas ng gutom at wag mo pong masyadong pagurin sarili mo ha, and don't forget to always pray to God, okay?💞 mahal na mahal kita asawa ko lagi mo pong iingatan sarili mo ha,.. alam mo dhie ang bilis no? 6 months na tayo akalain mo yun parang dati lang crush lang kita tapos crush mo'ko siguro kung di tayo nag kaaminan non hayst lonely buhay ko:( kasi wala akong poging boyfriend pero ngayon I'm so lucky to have u po, kasi parang dati lang gumagawa lang ako ng fake scenarios sa utak ko na boyfriend kita, dati pinapangarap lang kita maging boyfriend tapos ngayon real boyfriend na kita? owhhh thank god for giving me such a perfect boyfriend 🥹🙏anyways dhie thank you for loving me kasi kahit ganto ako kahit lagi akong galit, wala sa mood nanatili kapa rin sa tabi ko mahal na mahal po kita&lt;3 kahit anong ugali pa ang ipakita ko sa'yo you're always willing to understand me🥺❤️ kahit kailan di mo'ko sinaktan o pinag salitaan ng masasakit na salita kasi alam ko na mahal mo'ko dhiee, I hope hindi mawala ung pag mamahal mo sa'kin habang buhay. dhie sana wag ka pong mag bago 🥺 it's okay po kung sometimes napag sasabihan mo'ko kasi I know na para rin naman sa ikakabuti ko un it's okay to be mad at me sometimes dhie,... di po ako magagalit at mas lalong di ko rin pong gagawing biro ung galit mo dhie,.. mahal na mahal po kita pero kahit sabihin ko rin naman po yan alam ko naman po na di mo kayang magalit sa'kin kasi nakokonsensya ka, pero no worries dhie ok na ok lang po sa'kin ha. sinasabi ko lang po to kasi matagal tagal na rin po tayo para just in case na di mo po mapigilan magalit it's okay lang po ha, gusto ko rin po mag sorry sa mga behavior ko lately i know hindi tama ung bigla nlng kita ib-block tapos iiwanan sa daan🥺 alam ko pong mainit ulo ko at wala sa mood pero hindi po tama ung mga ginagawa ko sa'yo sorry po asawa ko patawarin mo po sana ako:(( hindi ko po dapat ginagawa sa'yo ung mga bagay na di mo deserve maranasan sa'kin, sorry po kung minsan nakakapag salita po ako ng hindi maganda sa'yo sorry po kung minsan nakakalimutan kong mahal kita, pero ung love na po un never pong mawawala mahal na mahal kita dhie. alam mo dhie iloveyouu more than words can say 🥺💗 tapos eto pa po bago ko makalimutan sorry din po kung kinausap ko si bry without your permission akala ko po kasi si bea un, kaya nireplyan ko po kung alam ko lang po na si bry un dapat di ko na po kinausap sorry din po kung kinausap ko sya about sa'min pero don't worry dhie, hindi nya masusukatan ung pag mamahal na binibigay mo sa'kin kahit mag chat pa sya at i-convince nya ako na bumalik, never at never na'ko na babalik sa knya kahit ikamatay ko pa kasi I'll always to choose you wala nang iba dhie wala akong pake sa knila dahil nakuha ko na ung mga standards ko sa lalaki at ikaw un, mahal na mahal kita dhie ha wag mong iisipin na baka balang araw sasama ako kay bry no dhie, hindi, i don't want to, wala wala i want them to get out of my life pag susuntukin ko pa yang mga yan, no joke hayst dhie gusto ko na dumating sa point na mag p-propose kana tapos ikakasal na tayo tapos may sarili na tayong bahay tapos ikaw na ung uuwian ko 🫶 hayyst sana lord balang araw makamit din namin yan 🥺🙏 happy 6th monthsary ulit asawa ko mahal na mahal po kita i'll love you forever and my heart belongs to you dhie iloveyousososososomuchhhhieee🥺💗
+        </p>
+
+    </div>
+
+
+    <!-- 💕 IF YOU EVER -->
+    <div class="content-box" id="ever">
+
+        <h3>💕 If You Ever.. 💞</h3>
+
+        <p>
+if you ever forget, kung gaano kita kamahal at I'll always choose you kahit sino pang taong iharap sa'kin ikaw at ikaw lang mamahalin ko dhie 🥺<br><br>
+
+if you’re sad andito lang po ako sa tabi mo I'm willing to listen to you. kahit gaano pa kahaba handa rin po akong maging sandalan mo 💞<br><br>
+
+If you're tired come here dhie I’ll give you a hug and a kiss. 🤗<br><br>
+
+If you need me andito lang po ako lagi sa tabi mo 😘<br><br>
+
+If you’re not okay I'll be there for you kahit anong mangyayari I'll never leave you 🌷<br><br>
+
+If you forget my love hindi ako mag sasawang iparamdam sa'yo kung gaano kita kamahal 💞<br><br>
+
+kung may makakalimutan ka I'll be there para ipaalala po sa'yo lahat lahat kung gaano ka kahalaga sa'kin
+        </p>
+
+    </div>
+
+
+    <!-- 🌷 WHY I CHOOSE YOU -->
+    <div class="content-box" id="choose">
+
+        <h3>☘️✨ Why I Choose You 🌷</h3>
+
+        <p>
+I choose you because hindi dahil sa appearance mo dhie, kundi dahil sa attitude na meron ka mapagmahal, caring, thoughtful, protective ka din tapos support ka sa lahat ng mga gusto ko, pinaparamdam mo rin sa'kin kung gaano ako kahalaga at kung gaano mo'ko kamahal i know po na we’re not perfect but I’ll still choose you every day out of everyone ikaw pa rin because my heart choose you, and I’ll keep choosing you sa hirap man o ginhawa 💞🥺
+        </p>
+
+    </div>
+
+
+    <!-- 🎵 SONGS -->
+    <div class="content-box" id="song">
+
+        <h3>🎵 My Song That Reminds Me Of You</h3>
+
+        <p>
+🎵 Shape of my heart - Backstreet boys<br><br>
+🎵 tingin - cup of Joe<br><br>
+🎵 kalapastanganan - fitterkarma
+        </p>
+
+    </div>
+
+
+    <!-- 🤞 PROMISE -->
+    <div class="content-box" id="promise">
+
+        <h3>🤞 My Promise To You 😘</h3>
+
+        <p>
+I'll always stay by your side<br><br>
+
+mas magiging better na'ko as your girlfriend<br><br>
+
+mamahalin kita until my last breath<br><br>
+
+susuportahan kita in everything that you want<br><br>
+
+I'll always understand you
+        </p>
+
+    </div>
+
+
+    <!-- ✝️ BIBLE -->
+    <div class="content-box" id="bible">
+
+        <h3>✝️ A Bible Verse For You 📖</h3>
+
+        <p>
+Ruth 1:16 - Where you go I will go, and where you stay I will stay.<br><br>
+
+Song of Solomon 8:7 - Many waters cannot quench love; rivers cannot sweep it away.<br><br>
+
+Song of Solomon 8:6 - Set me as a seal upon your heart<br><br>
+
+1 Corinthians 13:7 - Love always protects, always trusts, always hopes, always perseveres
+        </p>
+
+    </div>
+
+
+    <!-- 📸 MEMORY -->
+    <div class="content-box" id="memory">
+
+        <h3>📸 One Thing I'll Never Forget ❤️</h3>
+
+        <p>
+hindi ka nahihiya kapag you always kiss me on the cheeks or forehead, even when we're in public. It makes me feel like you're never ashamed of me and that you love me so much 🥺🫶
+        </p>
+
+    </div>
+
+
+    <div class="footer">
+        Happy 6th Monthsary Asawa Ko iloveyosomuchh 🤗💌
+    </div>
+
+</div>
+
+
+<!-- 🎵 MUSIC BUTTON -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+🎵
+</button>
+
+
+<script>
+
+/* 🎵 PASSWORD-SCREEN MUSIC */
+function togglePasswordMusic(){
+
+    var music = document.getElementById("loveMusic");
+    var button = document.getElementById("passwordMusicBtn");
+
+    if(music.paused){
+
+        music.play().then(function(){
+
+            button.innerHTML = "🎶 Our Song Is Playing";
+
+        }).catch(function(){
+
+            button.innerHTML = "⚠️ Check Music File";
+
+        });
+
+    }else{
+
+        music.pause();
+
+        button.innerHTML = "🎵 Play Our Song";
+
+    }
+}
+
+
+/* 🔒 PASSWORD */
+document.getElementById("passwordInput").addEventListener("keydown",function(e){
+
+    if(e.key === "Enter"){
+
+        var pass = document.getElementById("passwordInput").value;
+
+        if(pass === "031426"){
+
+            document.getElementById("lockScreen").style.display = "none";
+
+            document.getElementById("mainContent").style.display = "block";
+
+            document.getElementById("musicBtn").style.display = "block";
+
+        }else{
+
+            document.getElementById("errorMsg").style.display = "block";
+
+            document.getElementById("passwordInput").value = "";
+
+        }
+
+    }
+
+});
+
+
+/* 🎯 SHOW CONTENT */
+function showContent(sectionId){
+
+    document.getElementById("emojiGrid").style.display = "none";
+
+    document.getElementById("backBtn").classList.add("show");
+
+    var allBoxes = document.querySelectorAll(".content-box");
+
+    allBoxes.forEach(function(box){
+        box.classList.remove("show");
+    });
+
+    document.getElementById(sectionId).classList.add("show");
+
+}
+
+
+/* 🔙 BACK */
+function showGrid(){
+
+    document.getElementById("emojiGrid").style.display = "grid";
+
+    document.getElementById("backBtn").classList.remove("show");
+
+    var allBoxes = document.querySelectorAll(".content-box");
+
+    allBoxes.forEach(function(box){
+        box.classList.remove("show");
+    });
+
+}
+
+
+/* 🎵 PLAY / PAUSE AFTER LOGIN */
+function toggleMusic(){
+
+    var music = document.getElementById("loveMusic");
+    var button = document.getElementById("musicBtn");
+
+    if(music.paused){
+
+        music.play().then(function(){
+            button.innerHTML = "🎶";
+        }).catch(function(){
+            button.innerHTML = "⚠️";
+        });
+
+    }else{
+
+        music.pause();
+
+        button.innerHTML = "▶️";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
